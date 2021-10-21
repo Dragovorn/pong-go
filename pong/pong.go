@@ -1,8 +1,10 @@
 package pong
 
 import (
+	"github.com/go-gl/gl/v4.6-core/gl"
 	"github.com/isshoni-soft/sakura"
 	"github.com/isshoni-soft/sakura/logging"
+	"github.com/isshoni-soft/sakura/render"
 	"github.com/isshoni-soft/sakura/window"
 )
 
@@ -47,24 +49,42 @@ func (p Pong) PreInit() {
 func (p Pong) Init() {
 	p.logger.Log("Initializing Pong v", version.GetVersion())
 
-	go p.ticker()
+	render.ClearColor(1.0, 1.0, 1.0, 1.0)
+	render.Enable(gl.DEPTH_TEST)
+	render.DepthFunc(gl.LESS)
 }
 
-func (p Pong) ticker() {
-	defer sakura.Shutdown()
+func (p Pong) PostInit() { }
 
-	for !window.ShouldClose() {
-		window.SwapBuffers()
-		window.PollEvents()
+func (p Pong) Tick() {
+	//p.logger.Log("Tick")
+}
+
+func (p Pong) Clear() {
+	render.Clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT)
+}
+
+func (p Pong) Draw() {
+	points := []float32 {
+		0.0, 0.5, 0.0,
+		0.5, -0.5, 0.0,
+		-0.5, -0.5, 0.0,
 	}
-}
 
-//func (p Pong) PostInit() {
-//
-//}
+	var vbo uint32
+	var vao uint32
+	//var vertex_shader TODO - SHADERS
 
-func (p Pong) tick() {
+	// Configure VBO
+	render.GenBuffers(1, &vbo)
+	render.BindBuffer(gl.ARRAY_BUFFER, vbo)
+	render.BufferData(gl.ARRAY_BUFFER, len(points) * 4, gl.Ptr(points), gl.STATIC_DRAW)
 
+	render.GenVertexArrays(1, &vao)
+	render.BindVertexArray(vao)
+	render.EnableVertexAttribArray(0)
+	render.BindBuffer(gl.ARRAY_BUFFER, vbo)
+	render.VertexAttribPointer(0, 3, gl.FLOAT, false, 0, nil)
 }
 
 func Version() sakura.Version {
