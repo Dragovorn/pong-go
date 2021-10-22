@@ -14,7 +14,7 @@ argument or execute the `git submodule init` command. To update the submodule ma
 to use the `git submodule update` command, it will pull the latest version of the submodule
 that is available.
 
-`Taskfile` is used to automate annoying tasks. Whenever you change your assets
-you will need to recompile them, to do this you can execute `task compileAssets`
-this will automatically compile the `assets/` directory into the `generated/assets/`
-directory.
+Available Tasks
+---------------
+- `task compileAssets` - In order to bundle assets with our binary we have to compile them into our binary
+- `task build` - Builds program and creates an executable in `build/client[.exe]`
