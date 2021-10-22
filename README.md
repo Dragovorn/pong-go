@@ -18,3 +18,4 @@ Available Tasks
 ---------------
 - `task compileAssets` - In order to bundle assets with our binary we have to compile them into our binary
 - `task build` - Builds program and creates an executable in `build/client[.exe]`
+- `task run` - Runs the game
