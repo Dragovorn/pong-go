@@ -5,6 +5,8 @@
 *.so
 *.dylib
 
+*.log
+
 # Test binary, built with `go test -c`
 *.test
 
@@ -14,6 +16,7 @@
 **/build/
 **/.idea/
 **/generated/
+**/logs/
 
 # Dependency directories (remove the comment below to include it)
 vendor/
