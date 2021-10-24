@@ -10,9 +10,8 @@ Dependencies
 Installation
 ------------
 When pulling this repository please be sure to either include the `--recurse-submodules`
-argument or execute the `git submodule init` command. To update the submodule make sure
-to use the `git submodule update` command, it will pull the latest version of the submodule
-that is available.
+argument or execute the `git submodule init` command. Please be careful when committing
+changes made to the submodule, as incorrect usage can lead to breaking it.
 
 Available Tasks
 ---------------
