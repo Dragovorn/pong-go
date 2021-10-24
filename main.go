@@ -7,6 +7,6 @@ import (
 )
 
 func main() {
-	logging.InitLogfile("pong/logs/")
+	logging.InitLogfile("logs/")
 	sakura.Init(pong.Init())
 }
