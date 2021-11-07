@@ -2,8 +2,8 @@ package pong
 
 import (
 	"github.com/go-gl/gl/v4.6-core/gl"
+	"github.com/isshoni-soft/roxxy"
 	"github.com/isshoni-soft/sakura"
-	"github.com/isshoni-soft/sakura/logging"
 	"github.com/isshoni-soft/sakura/render"
 	"github.com/isshoni-soft/sakura/window"
 )
@@ -13,14 +13,14 @@ var pong *Pong
 var version = sakura.Version {
 	Major: 0,
 	Minor: 0,
-	Patch: 1,
+	Patch: 2,
 	Snapshot: true,
 }
 
 type Pong struct {
 	sakura.Game
 
-	logger *logging.Logger
+	logger *roxxy.Logger
 	shaderProgram *render.ShaderProgram
 	vao uint32
 	initialized bool
@@ -30,7 +30,7 @@ func Init() (result *Pong) {
 	if pong == nil {
 		pong = new(Pong)
 		result = pong
-		result.logger = logging.NewLogger("Pong", 10)
+		result.logger = roxxy.NewLogger("Pong>")
 	} else {
 		result = pong
 	}
