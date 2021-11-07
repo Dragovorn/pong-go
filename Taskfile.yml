@@ -16,7 +16,7 @@ tasks:
     run: once
     desc: Compiles assets into go code
     cmds:
-      - go-bindata -o generated/assets/assets.go -pkg assets -prefix assets/ assets/
+      - go-bindata -o generated/assets/assets.go -pkg assets -prefix assets/ assets/*
   build:
     run: once
     deps: [ compileAssets ]

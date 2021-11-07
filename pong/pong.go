@@ -1,6 +1,7 @@
 package pong
 
 import (
+	"github.com/dragovorn/go-pong/generated/assets"
 	"github.com/go-gl/gl/v4.6-core/gl"
 	"github.com/isshoni-soft/roxxy"
 	"github.com/isshoni-soft/sakura"
@@ -56,24 +57,18 @@ func (p *Pong) PreInit() {
 func (p *Pong) Init() {
 	p.logger.Log("Initializing Pong v", Version().GetVersion())
 
-	render.ClearColor(1.0, 1.0, 1.0, 1.0)
+	render.ClearColor(0.0, 0.0, 0.0, 1.0)
 	render.Enable(gl.DEPTH_TEST)
 	render.DepthFunc(gl.LESS)
 
 	p.logger.Log("Compiling shaders...")
 
-	vertex := render.ShaderFromStrings(gl.VERTEX_SHADER, "#version 400\n",
-		"in vec3 vp;",
-		"void main() {",
-		"  gl_Position = vec4(vp, 1.0);",
-		"}")
+	data, _ := assets.Asset("shader/shader.vert")
+	vertex := render.ShaderFromString(gl.VERTEX_SHADER, string(data))
 	render.CompileShader(vertex)
 
-	fragment := render.ShaderFromStrings(gl.FRAGMENT_SHADER, "#version 400\n",
-		"out vec4 frag_colour;",
-		"void main() {",
-		"  frag_colour = vec4(0.5, 0.0, 0.5, 1.0);",
-		"}")
+	data, _ = assets.Asset("shader/shader.frag")
+	fragment := render.ShaderFromStrings(gl.FRAGMENT_SHADER, string(data))
 	render.CompileShader(fragment)
 
 	p.shaderProgram = render.NewShaderProgram(vertex, fragment)
