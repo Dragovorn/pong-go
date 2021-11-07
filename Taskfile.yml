@@ -6,7 +6,7 @@ tasks:
     cmds:
       - git submodule init
       - git submodule update
-      - cd engine/ && task init && cd ..
+      - cd engine/ && git checkout master && task init && cd ..
   clean:
     run: once
     desc: Deletes build/ directory

@@ -9,12 +9,12 @@ Dependencies
 
 Installation
 ------------
-When pulling this repository please be sure to either include the `--recurse-submodules`
-argument or execute the `git submodule init` command. Please be careful when committing
+When pulling this repository please be sure to execute the `task init` command. Please be careful when committing
 changes made to the submodule, as incorrect usage can lead to breaking it.
 
 Available Tasks
 ---------------
+- `task init` - Initializes the repository by pulling all required submodules.
 - `task compileAssets` - In order to bundle assets with our binary we have to compile them into our binary
 - `task build` - Builds program and creates an executable in `build/client[.exe]`
 - `task run` - Runs the game
