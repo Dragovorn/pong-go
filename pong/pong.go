@@ -3,10 +3,12 @@ package pong
 import (
 	"github.com/dragovorn/go-pong/generated/assets"
 	"github.com/go-gl/gl/v4.6-core/gl"
+	"github.com/go-gl/glfw/v3.3/glfw"
 	"github.com/isshoni-soft/roxxy"
 	"github.com/isshoni-soft/sakura"
 	"github.com/isshoni-soft/sakura/event"
 	"github.com/isshoni-soft/sakura/event/events"
+	"github.com/isshoni-soft/sakura/input"
 	"github.com/isshoni-soft/sakura/render"
 	"github.com/isshoni-soft/sakura/window"
 )
@@ -55,8 +57,17 @@ func (p *Pong) PreInit() {
 	event.RegisterListener(event.Listener{
 		IgnoreCancelled: false,
 		Async:           true,
+		Priority:        event.ASAP,
 		Function: func(event *event.Event) {
-			p.logger.Log("Input Event")
+			eventData := event.Data.(input.KeyEventData)
+
+			if eventData.Action == glfw.Press {
+				p.logger.Log("Press: " + eventData.KeyName)
+			} else if eventData.Action == glfw.Repeat {
+				p.logger.Log("Repeat: " + eventData.KeyName)
+			} else if eventData.Action == glfw.Release {
+				p.logger.Log("Release: " + eventData.KeyName)
+			}
 		},
 	}, events.INPUT)
 
