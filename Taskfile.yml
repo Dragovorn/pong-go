@@ -7,6 +7,7 @@ tasks:
       - git submodule init
       - git submodule update
       - cd engine/ && git checkout master && task init && cd ..
+      - task: compileAssets
   clean:
     run: once
     desc: Deletes build/ directory
@@ -33,7 +34,7 @@ tasks:
     run: once
     desc: Pushes submodules
     cmds:
-      - ./scripts/push-submodule.sh ./engine
+      - ./engine/scripts/push-submodule.sh ./engine
       - git reset
       - git add "engine"
       - cmd: git commit -m "[TASKFILE] update submodules"

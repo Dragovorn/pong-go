@@ -5,26 +5,28 @@ import (
 	"github.com/go-gl/gl/v4.6-core/gl"
 	"github.com/isshoni-soft/roxxy"
 	"github.com/isshoni-soft/sakura"
+	"github.com/isshoni-soft/sakura/event"
+	"github.com/isshoni-soft/sakura/event/events"
 	"github.com/isshoni-soft/sakura/render"
 	"github.com/isshoni-soft/sakura/window"
 )
 
 var pong *Pong
 
-var version = sakura.Version {
-	Major: 0,
-	Minor: 0,
-	Patch: 2,
+var version = sakura.Version{
+	Major:    0,
+	Minor:    0,
+	Patch:    2,
 	Snapshot: true,
 }
 
 type Pong struct {
 	sakura.Game
 
-	logger *roxxy.Logger
+	logger        *roxxy.Logger
 	shaderProgram *render.ShaderProgram
-	vao uint32
-	initialized bool
+	vao           uint32
+	initialized   bool
 }
 
 func Init() (result *Pong) {
@@ -49,6 +51,14 @@ func (p *Pong) PreInit() {
 	if version.Snapshot {
 		title = title + " v" + version.GetVersion()
 	}
+
+	event.RegisterListener(event.Listener{
+		IgnoreCancelled: false,
+		Async:           true,
+		Function: func(event *event.Event) {
+			p.logger.Log("Input Event")
+		},
+	}, events.INPUT)
 
 	window.SetTitle(title)
 	sakura.SetDebug(version.Snapshot)
@@ -79,7 +89,7 @@ func (p *Pong) Init() {
 
 	var vbo uint32
 
-	points := []float32 {
+	points := []float32{
 		0.0, 0.5, 0.0,
 		0.5, -0.5, 0.0,
 		-0.5, -0.5, 0.0,
@@ -88,7 +98,7 @@ func (p *Pong) Init() {
 	// Configure VBO
 	render.GenBuffers(1, &vbo)
 	render.BindBuffer(gl.ARRAY_BUFFER, vbo)
-	render.BufferData(gl.ARRAY_BUFFER, len(points) * 4, gl.Ptr(points), gl.STATIC_DRAW)
+	render.BufferData(gl.ARRAY_BUFFER, len(points)*4, gl.Ptr(points), gl.STATIC_DRAW)
 
 	render.GenVertexArrays(1, &p.vao)
 	render.BindVertexArray(p.vao)
@@ -99,9 +109,9 @@ func (p *Pong) Init() {
 	p.SetInitialized(true)
 }
 
-func (p *Pong) PostInit() { }
+func (p *Pong) PostInit() {}
 
-func (p *Pong) Tick() { }
+func (p *Pong) Tick() {}
 
 func (p *Pong) Clear() {
 	render.Clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT)

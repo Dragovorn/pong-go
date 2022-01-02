@@ -3,7 +3,9 @@ module github.com/dragovorn/go-pong
 go 1.17
 
 replace github.com/isshoni-soft/sakura => ./engine/
+
 replace github.com/isshoni-soft/roxxy => ./engine/roxxy/
+
 replace github.com/isshoni-soft/kirito => ./engine/kirito/
 
 require (

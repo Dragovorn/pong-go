@@ -6,3 +6,5 @@ github.com/isshoni-soft/roxxy v0.0.0-20211106044041-28a6add6336b h1:Rw6gcA7kXOIL
 github.com/isshoni-soft/roxxy v0.0.0-20211106044041-28a6add6336b/go.mod h1:uLstebFnKT9epD9v+H+b9RI2A5MqfcYcYWbDOuU4MaY=
 github.com/isshoni-soft/sakura v0.0.0-20211022193349-d711737eafa0 h1:pOtddTVVaolFBqT+3h4lYmemoltFX3hBR04IGcOfbcE=
 github.com/isshoni-soft/sakura v0.0.0-20211022193349-d711737eafa0/go.mod h1:c8QKL+5yYm7GoMvTqmHdXzwKrbChQtN+vAoqlAIFWbc=
+github.com/shuLhan/go-bindata v4.0.0+incompatible h1:xD8LkuVZLV5OOn/IEuFdt6EEAW7deWiqgwaaSGhjAJc=
+github.com/shuLhan/go-bindata v4.0.0+incompatible/go.mod h1:pkcPAATLBDD2+SpAPnX5vEM90F7fcwHCvvLCMXcmw3g=
