@@ -5,11 +5,11 @@ import (
 	"github.com/go-gl/gl/v4.6-core/gl"
 	"github.com/go-gl/glfw/v3.3/glfw"
 	"github.com/isshoni-soft/roxxy"
-	"github.com/isshoni-soft/sakura"
 	"github.com/isshoni-soft/sakura/event"
 	"github.com/isshoni-soft/sakura/event/events"
 	"github.com/isshoni-soft/sakura/input"
 	"github.com/isshoni-soft/sakura/render"
+	"github.com/isshoni-soft/sakura/sakura"
 	"github.com/isshoni-soft/sakura/window"
 )
 
@@ -122,7 +122,7 @@ func (p *Pong) Init() {
 
 func (p *Pong) PostInit() {}
 
-func (p *Pong) Tick() {}
+func (p *Pong) Tick(game sakura.Game) {}
 
 func (p *Pong) Clear() {
 	render.Clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT)
