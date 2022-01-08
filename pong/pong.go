@@ -23,29 +23,32 @@ var version = sakura.Version{
 }
 
 type Pong struct {
-	sakura.Game
+	sakura.GameLogic
 
-	logger        *roxxy.Logger
+	Game sakura.Game
+
 	shaderProgram *render.ShaderProgram
 	vao           uint32
 	initialized   bool
 }
 
-func Init() (result *Pong) {
-	if pong == nil {
-		pong = new(Pong)
-		result = pong
-		result.logger = roxxy.NewLogger("Pong>")
-	} else {
-		result = pong
+func Init() (result sakura.Game) {
+	pong = new(Pong)
+
+	result = sakura.Game{
+		Logic:   pong,
+		Logger:  roxxy.NewLogger("Pong>"),
+		Version: version,
 	}
+
+	pong.Game = result
 
 	return result
 }
 
 func (p *Pong) PreInit() {
 	if version.Snapshot {
-		p.logger.Log("Snapshot version detected! Enabling debug mode...")
+		p.Game.Logger.Log("Snapshot version detected! Enabling debug mode...")
 	}
 
 	title := "Pong"
@@ -62,11 +65,11 @@ func (p *Pong) PreInit() {
 			eventData := event.Data.(input.KeyEventData)
 
 			if eventData.Action == glfw.Press {
-				p.logger.Log("Press: " + eventData.KeyName)
+				p.Game.Logger.Log("Press: " + eventData.KeyName)
 			} else if eventData.Action == glfw.Repeat {
-				p.logger.Log("Repeat: " + eventData.KeyName)
+				p.Game.Logger.Log("Repeat: " + eventData.KeyName)
 			} else if eventData.Action == glfw.Release {
-				p.logger.Log("Release: " + eventData.KeyName)
+				p.Game.Logger.Log("Release: " + eventData.KeyName)
 			}
 		},
 	}, events.INPUT)
@@ -76,13 +79,13 @@ func (p *Pong) PreInit() {
 }
 
 func (p *Pong) Init() {
-	p.logger.Log("Initializing Pong v", Version().GetVersion())
+	p.Game.Logger.Log("Initializing Pong v", Version().GetVersion())
 
 	render.ClearColor(0.0, 0.0, 0.0, 1.0)
 	render.Enable(gl.DEPTH_TEST)
 	render.DepthFunc(gl.LESS)
 
-	p.logger.Log("Compiling shaders...")
+	p.Game.Logger.Log("Compiling shaders...")
 
 	data, _ := assets.Asset("shader/shader.vert")
 	vertex := render.ShaderFromString(gl.VERTEX_SHADER, string(data))
@@ -96,7 +99,7 @@ func (p *Pong) Init() {
 
 	render.LinkShaderProgram(p.shaderProgram)
 
-	p.logger.Log("Compiling VBO...")
+	p.Game.Logger.Log("Compiling VBO...")
 
 	var vbo uint32
 
@@ -122,7 +125,7 @@ func (p *Pong) Init() {
 
 func (p *Pong) PostInit() {}
 
-func (p *Pong) Tick(game sakura.Game) {}
+func (p *Pong) Tick() {}
 
 func (p *Pong) Clear() {
 	render.Clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT)
